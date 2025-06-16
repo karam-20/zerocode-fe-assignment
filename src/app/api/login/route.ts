@@ -31,10 +31,10 @@ export async function POST(req: NextRequest) {
 
   // ✅ Cookie is now set from your Next.js frontend domain
   if (token) {
-    response.cookies.set("token", token, {
+    response.cookies.set("token", String(token), {
       httpOnly: true,
       secure: true,
-      sameSite: "Lax", // or "None" with `secure: true` if cross-domain still
+      sameSite: "lax" as const,
       path: "/",
       maxAge: 15 * 24 * 60 * 60,
     });

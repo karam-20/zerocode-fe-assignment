@@ -13,14 +13,14 @@ export default function LoginPage() {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-
         loginMutation.mutate(
             { email, password },
             {
                 onSuccess: () => {
                     router.push('/');
                 },
-                onError: (error: any) => {
+
+                onError: (error) => {
                     console.error("Login error:", error.message);
                 },
             }

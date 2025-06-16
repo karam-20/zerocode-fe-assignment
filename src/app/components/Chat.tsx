@@ -2,6 +2,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 
+
+
+
 type Message = {
     sender: 'user' | 'bot';
     text: string;
@@ -56,7 +59,8 @@ export default function Chat() {
     }, [messages]);
 
     const handleVoiceInput = () => {
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        // @ts-expect-error - SpeechRecognition not in window type
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
             alert('Speech recognition is not supported in this browser.');
             return;
@@ -69,7 +73,8 @@ export default function Chat() {
         recognition.onstart = () => setListening(true);
         recognition.onend = () => setListening(false);
 
-        recognition.onresult = (event: SpeechRecognitionEvent) => {
+        // @ts-expect-error - SpeechRecognitionEvent not properly typed
+        recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
             setInput(transcript);
         };
