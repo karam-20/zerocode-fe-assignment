@@ -1,11 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
-import { useTheme } from '../context/ThemeContext';
+// import { useTheme } from '../context/ThemeContext';
 
 
 const Navbar = () => {
     const router = useRouter();
-    const { theme, toggleTheme } = useTheme();
+    // const { theme, toggleTheme } = useTheme();
 
     const handleLogout = async () => {
         try {
