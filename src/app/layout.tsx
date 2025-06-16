@@ -6,6 +6,7 @@ import { ReactNode, useState } from 'react';
 import './globals.css';
 import Navbar from './components/Navbar';
 import { usePathname } from 'next/navigation'
+import { ThemeProvider } from './context/ThemeContext';
 
 
 
@@ -19,15 +20,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        {!hideNavbar && <div className='fixed top-0 left-0 w-full'>
-          <Navbar />
-        </div>}
+        <ThemeProvider>
+          {!hideNavbar && <div className='fixed top-0 left-0 w-full'>
+            <Navbar />
+          </div>}
 
-        <QueryClientProvider client={queryClient}>
-          <div className={hideNavbar ? '' : 'pt-16'}>
-            {children}
-          </div>
-        </QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+            <div className={hideNavbar ? '' : 'pt-16'}>
+              {children}
+            </div>
+          </QueryClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
